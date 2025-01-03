@@ -1,96 +1,69 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
+﻿using System;
+using System.Windows;
+using System.Windows.Threading;
 
 namespace chat_app
 {
     public partial class MainWindow : Window
     {
+        private string message = "Welcome To <ZeroDayCrew> Chat!";  // The message to display (without the exclamation mark)
+        private DispatcherTimer cursorTimer;  // Timer to handle blinking effect
+
         public MainWindow()
         {
             InitializeComponent();
+            InitializeBlinkingEffect();
         }
 
-        private void SendButton_Click(object sender, RoutedEventArgs e)
+        // Initialize the blinking effect for "!"
+        private void InitializeBlinkingEffect()
         {
-            // Get the message from the TextBox
-            string message = MessageBox.Text;
-
-            if (!string.IsNullOrWhiteSpace(message) && message != "Enter your message")
+            cursorTimer = new DispatcherTimer
             {
-                // Create a Border to style the message
-                Border messageBorder = new Border
-                {
-                    //Background = Brushes.White,
-                    BorderBrush = Brushes.Green,
-                    BorderThickness = new Thickness(1,1,1,1),
-                    CornerRadius = new CornerRadius(0),
-                    Padding = new Thickness(10,2,0,2),
-                    //Margin = new Thickness(5),
-                    //HorizontalAlignment = HorizontalAlignment.Right // Aligns your message to the right
-                };
-
-                // Add the message text
-                TextBlock messageText = new TextBlock
-                {
-                    Text = message,
-                    Foreground = Brushes.DarkRed,
-                    TextWrapping = TextWrapping.Wrap
-                };
-                messageBorder.Child = messageText;
-
-                // Add the message to the display area
-                MessageDisplayArea.Children.Add(messageBorder);
-
-                // Clear the TextBox
-                MessageBox.Text = string.Empty;
-            }
-            ReceiveMessage("Hello from the other side!");
-        }
-
-        private void MessageBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            if (MessageBox.Text == "Enter your message")
-            {
-                MessageBox.Text = string.Empty;
-                MessageBox.Foreground = Brushes.Green;
-            }
-        }
-
-        private void MessageBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(MessageBox.Text))
-            {
-                MessageBox.Text = "Enter your message";
-                MessageBox.Foreground = Brushes.Gray;
-            }
-        }
-
-        // Simulate receiving messages from other users
-        public void ReceiveMessage(string message)
-        {
-            Border messageBorder = new Border
-            {
-                //Background = Brushes.LightBlue,
-                BorderBrush = Brushes.BlueViolet,
-                BorderThickness = new Thickness(1,1,1,1),
-                //CornerRadius = new CornerRadius(5),
-                Padding = new Thickness(10,2,0,2),
-                Margin = new Thickness(0,10,0,10),
-                //HorizontalAlignment = HorizontalAlignment.Left // Aligns other user's messages to the left
+                Interval = TimeSpan.FromMilliseconds(500)  // Blinking effect interval for "!"
             };
+            cursorTimer.Tick += CursorTimer_Tick;  // Event handler to toggle "!" visibility
+        }
 
-            TextBlock messageText = new TextBlock
+        // This method starts the blinking effect and shows the full message
+        private void StartBlinkingEffect()
+        {
+            TypingText.Text = message;  // Display the full message
+            EnterButton.Visibility = Visibility.Visible;  // Show the "Enter" button immediately
+            cursorTimer.Start();  // Start blinking the "!" at the end of the message
+        }
+
+        // Blinking cursor effect (toggle visibility of "!")
+        private void CursorTimer_Tick(object sender, EventArgs e)
+        {
+            if (TypingText.Text.EndsWith("!"))
             {
-                Text = message,
-                Foreground = Brushes.DarkOrange,
-                TextWrapping = TextWrapping.Wrap
-            };
-            messageBorder.Child = messageText;
+                // Remove "!" if it's currently visible
+                TypingText.Text = TypingText.Text.Substring(0, TypingText.Text.Length - 1);
+                TypingText.Text += " ";
+            }
+            else
+            {
+                // Add "!" at the end of the message
+                TypingText.Text = TypingText.Text.Substring(0, TypingText.Text.Length - 1);
+                TypingText.Text += "!";
+            }
+        }
 
-            MessageDisplayArea.Children.Add(messageBorder);
-            
+        // Start the effect when the window loads
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            StartBlinkingEffect();  // Start displaying the message with blinking "!" and show the button
+        }
 
+        // Enter button click handler
+        private void EnterButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Handle what happens when the Enter button is pressed
+            // Create an instance of ServerConfig from Views folder
+            Views.ServerConfig serverConfigWindow = new Views.ServerConfig();
+            serverConfigWindow.Show();  // Show the ServerConfig window
+            this.Close();  // Close the MainWindow  // Example action (can be replaced with other functionality)
         }
     }
 }

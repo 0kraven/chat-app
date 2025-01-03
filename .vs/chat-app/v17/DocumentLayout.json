@@ -3,12 +3,20 @@
   "WorkspaceRootPath": "D:\\chat-app\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{31F1394E-5FDE-4D20-BFB3-258563287B38}|chat-app.csproj|D:\\chat-app\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{31F1394E-5FDE-4D20-BFB3-258563287B38}|chat-app.csproj|d:\\chat-app\\views\\serverconfig.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{31F1394E-5FDE-4D20-BFB3-258563287B38}|chat-app.csproj|solutionrelative:views\\serverconfig.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31F1394E-5FDE-4D20-BFB3-258563287B38}|chat-app.csproj|d:\\chat-app\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{31F1394E-5FDE-4D20-BFB3-258563287B38}|chat-app.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{31F1394E-5FDE-4D20-BFB3-258563287B38}|chat-app.csproj|d:\\chat-app\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{31F1394E-5FDE-4D20-BFB3-258563287B38}|chat-app.csproj|D:\\chat-app\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{31F1394E-5FDE-4D20-BFB3-258563287B38}|chat-app.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31F1394E-5FDE-4D20-BFB3-258563287B38}|chat-app.csproj|d:\\chat-app\\views\\serverconfig.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31F1394E-5FDE-4D20-BFB3-258563287B38}|chat-app.csproj|solutionrelative:views\\serverconfig.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -23,6 +31,31 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "D:\\chat-app\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "MainWindow.xaml.cs",
+              "ToolTip": "D:\\chat-app\\MainWindow.xaml.cs",
+              "RelativeToolTip": "MainWindow.xaml.cs",
+              "ViewState": "AgIAADYAAAAAAAAAAAAowD0AAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-02T03:14:49.076Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ServerConfig.xaml",
+              "DocumentMoniker": "D:\\chat-app\\views\\ServerConfig.xaml",
+              "RelativeDocumentMoniker": "views\\ServerConfig.xaml",
+              "ToolTip": "D:\\chat-app\\views\\ServerConfig.xaml",
+              "RelativeToolTip": "views\\ServerConfig.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-01-03T01:17:22.188Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "D:\\chat-app\\MainWindow.xaml",
               "RelativeDocumentMoniker": "MainWindow.xaml",
@@ -34,15 +67,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "D:\\chat-app\\MainWindow.xaml.cs",
-              "RelativeDocumentMoniker": "MainWindow.xaml.cs",
-              "ToolTip": "D:\\chat-app\\MainWindow.xaml.cs*",
-              "RelativeToolTip": "MainWindow.xaml.cs*",
-              "ViewState": "AgIAAD0AAAAAAAAAAAAWwE4AAAAwAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "ServerConfig.xaml.cs",
+              "DocumentMoniker": "D:\\chat-app\\views\\ServerConfig.xaml.cs",
+              "RelativeDocumentMoniker": "views\\ServerConfig.xaml.cs",
+              "ToolTip": "D:\\chat-app\\views\\ServerConfig.xaml.cs",
+              "RelativeToolTip": "views\\ServerConfig.xaml.cs",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAAAEsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-02T03:14:49.076Z",
+              "WhenOpened": "2025-01-03T01:17:09.658Z",
               "EditorCaption": ""
             }
           ]

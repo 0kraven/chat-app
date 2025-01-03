@@ -5,7 +5,6 @@ D:\chat-app\obj\Debug\chat-app.csproj.AssemblyReference.cache
 D:\chat-app\obj\Debug\MainWindow.g.cs
 D:\chat-app\obj\Debug\App.g.cs
 D:\chat-app\obj\Debug\chat-app_MarkupCompile.cache
-D:\chat-app\obj\Debug\chat-app_MarkupCompile.lref
 D:\chat-app\obj\Debug\MainWindow.baml
 D:\chat-app\obj\Debug\chat-app.g.resources
 D:\chat-app\obj\Debug\chat_app.Properties.Resources.resources
@@ -13,3 +12,5 @@ D:\chat-app\obj\Debug\chat-app.csproj.GenerateResource.cache
 D:\chat-app\obj\Debug\chat-app.csproj.CoreCompileInputs.cache
 D:\chat-app\obj\Debug\chat-app.exe
 D:\chat-app\obj\Debug\chat-app.pdb
+D:\chat-app\obj\Debug\views\ServerConfig.baml
+D:\chat-app\obj\Debug\views\ServerConfig.g.cs
