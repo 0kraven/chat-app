@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using System.Configuration;
 using System.Data;
 using System.Windows;
@@ -11,3 +12,22 @@ public partial class App : Application
 {
 }
 
+=======
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows;
+
+namespace chat_app
+{
+    /// <summary>
+    /// Interaction logic for App.xaml
+    /// </summary>
+    public partial class App : Application
+    {
+    }
+}
+>>>>>>> aacd93f3eb6eb3a0310163183239b093fd1c9cc5
