@@ -4,12 +4,12 @@
 winexe
 C#
 .cs
-D:\projects\chat-app\ServerApp\obj\Debug\net9.0-windows\
+C:\Users\blackrose\Desktop\chat-app\server\obj\Debug\net9.0-windows\
 ServerApp
 none
 false
 TRACE;DEBUG;NET;NET9_0;NETCOREAPP
-D:\projects\chat-app\ServerApp\App.xaml
+C:\Users\blackrose\Desktop\chat-app\server\App.xaml
 11407045341
 
 4339113393

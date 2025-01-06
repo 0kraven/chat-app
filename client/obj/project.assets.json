@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\projects\\chat-app\\client\\chatapp.csproj",
+      "projectUniqueName": "C:\\Users\\blackrose\\Desktop\\chat-app\\client\\chatapp.csproj",
       "projectName": "chatapp",
-      "projectPath": "D:\\projects\\chat-app\\client\\chatapp.csproj",
+      "projectPath": "C:\\Users\\blackrose\\Desktop\\chat-app\\client\\chatapp.csproj",
       "packagesPath": "C:\\Users\\blackrose\\.nuget\\packages\\",
-      "outputPath": "D:\\projects\\chat-app\\client\\obj\\",
+      "outputPath": "C:\\Users\\blackrose\\Desktop\\chat-app\\client\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\blackrose\\AppData\\Roaming\\NuGet\\NuGet.Config"
