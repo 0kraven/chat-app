@@ -49,11 +49,9 @@ namespace chat_app.Views
         // Event handler for Connect button click
         private void ConnectButton_Click(object sender, RoutedEventArgs e)
         {
-            // Retrieve values from the textboxes
             string username = UsernameBox.Text;
             string serverIP = ServerIPBox.Text;
 
-            // Simple validation to ensure fields aren't empty
             if (string.IsNullOrEmpty(username) || username == "Enter Username")
             {
                 MessageBox.Show("Please enter a valid username.");
@@ -68,35 +66,32 @@ namespace chat_app.Views
 
             try
             {
-                // Attempt to connect to the server with timeout handling
                 var client = new TcpClient();
                 var result = client.BeginConnect(serverIP, 12345, null, null);
-                var success = result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(5)); // 5-second timeout
+                var success = result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(5));
 
                 if (!success)
                 {
                     throw new Exception("Connection timed out.");
                 }
 
-                client.EndConnect(result); // Complete connection
+                client.EndConnect(result);  // Complete connection
 
-                // Send the username to the server
                 NetworkStream stream = client.GetStream();
                 StreamWriter writer = new StreamWriter(stream);
-                writer.WriteLine(username);  // Sending username to the server
+                writer.WriteLine(username);  // Send username to server
                 writer.Flush();
 
-                // Optionally, you can receive a response from the server (e.g., success/failure message)
+                // Optionally receive a response from the server
                 StreamReader reader = new StreamReader(stream);
                 string serverResponse = reader.ReadLine();
 
                 if (serverResponse == "OK")
                 {
-                    // Successfully connected and authenticated, open the chat window
-                    ChatWindow chatWindow = new ChatWindow();
+                    // Pass the TcpClient to the ChatWindow
+                    ChatWindow chatWindow = new ChatWindow(client);
                     chatWindow.Show();
 
-                    // Close the ServerConfig window
                     this.Close();
                 }
                 else
@@ -104,13 +99,13 @@ namespace chat_app.Views
                     MessageBox.Show("Connection failed. Server responded with: " + serverResponse);
                 }
 
-                // Close the TCP client connection
-                client.Close();
+                // client.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error connecting to server: " + ex.Message);
             }
         }
+
     }
 }

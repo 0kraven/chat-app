@@ -75,32 +75,32 @@ namespace ServerApp
 
         // Listening for incoming client connections
         private void ListenForClients()
-{
-    try
-    {
-        while (true)
         {
-            var client = _tcpListener.AcceptTcpClient();
-            Thread clientThread = new Thread(() => HandleClient(client));
-            clientThread.IsBackground = true;
-            clientThread.Start();
-
-            // Show a popup message when a client is connected
-            Dispatcher.Invoke(() =>
+            try
             {
-                MessageBox.Show("New client connected!", "Client Connected", MessageBoxButton.OK, MessageBoxImage.Information);
-            });
+                while (true)
+                {
+                    var client = _tcpListener.AcceptTcpClient();
+                    Thread clientThread = new Thread(() => HandleClient(client));
+                    clientThread.IsBackground = true;
+                    clientThread.Start();
+
+                    // Show a popup message when a client is connected
+                    Dispatcher.Invoke(() =>
+                    {
+                        MessageBox.Show("New client connected!", "Client Connected", MessageBoxButton.OK, MessageBoxImage.Information);
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    ServerStatus.Text = "Error: " + ex.Message;
+                    ServerStatus.Foreground = System.Windows.Media.Brushes.Red;
+                });
+            }
         }
-    }
-    catch (Exception ex)
-    {
-        Dispatcher.Invoke(() =>
-        {
-            ServerStatus.Text = "Error: " + ex.Message;
-            ServerStatus.Foreground = System.Windows.Media.Brushes.Red;
-        });
-    }
-}
 
 
         // Handle incoming client
