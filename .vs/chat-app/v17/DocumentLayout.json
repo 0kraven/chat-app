@@ -1,0 +1,69 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\blackrose\\Desktop\\chat-app\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C2CB1ED3-D027-464C-85D8-D39DCE7C3D72}|server\\ServerApp.csproj|c:\\users\\blackrose\\desktop\\chat-app\\server\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2CB1ED3-D027-464C-85D8-D39DCE7C3D72}|server\\ServerApp.csproj|solutionrelative:server\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{944DA733-1DC7-45E9-9332-C9169ED45522}|client\\chatapp.csproj|c:\\users\\blackrose\\desktop\\chat-app\\client\\views\\chatsection.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{944DA733-1DC7-45E9-9332-C9169ED45522}|client\\chatapp.csproj|solutionrelative:client\\views\\chatsection.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{944DA733-1DC7-45E9-9332-C9169ED45522}|client\\chatapp.csproj|c:\\users\\blackrose\\desktop\\chat-app\\client\\views\\serverconfig.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{944DA733-1DC7-45E9-9332-C9169ED45522}|client\\chatapp.csproj|solutionrelative:client\\views\\serverconfig.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ServerConfig.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\blackrose\\Desktop\\chat-app\\client\\views\\ServerConfig.xaml.cs",
+              "RelativeDocumentMoniker": "client\\views\\ServerConfig.xaml.cs",
+              "ToolTip": "C:\\Users\\blackrose\\Desktop\\chat-app\\client\\views\\ServerConfig.xaml.cs",
+              "RelativeToolTip": "client\\views\\ServerConfig.xaml.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAgwFcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-07T05:53:21.288Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ChatSection.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\blackrose\\Desktop\\chat-app\\client\\views\\ChatSection.xaml.cs",
+              "RelativeDocumentMoniker": "client\\views\\ChatSection.xaml.cs",
+              "ToolTip": "C:\\Users\\blackrose\\Desktop\\chat-app\\client\\views\\ChatSection.xaml.cs",
+              "RelativeToolTip": "client\\views\\ChatSection.xaml.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAIA7wDcAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-07T05:12:15.826Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\blackrose\\Desktop\\chat-app\\server\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "server\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\blackrose\\Desktop\\chat-app\\server\\MainWindow.xaml.cs",
+              "RelativeToolTip": "server\\MainWindow.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-07T04:01:59.263Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
