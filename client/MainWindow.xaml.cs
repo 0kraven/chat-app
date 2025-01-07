@@ -61,7 +61,7 @@ namespace chat_app
         {
             // Handle what happens when the Enter button is pressed
             // Create an instance of ServerConfig from Views folder
-            Views.ServerConfig serverConfigWindow = new Views.ServerConfig();
+            chat_app.Views.ServerConfig serverConfigWindow = new Views.ServerConfig();
             serverConfigWindow.Show();  // Show the ServerConfig window
             this.Close();  // Close the MainWindow  // Example action (can be replaced with other functionality)
         }

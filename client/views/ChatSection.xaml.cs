@@ -3,7 +3,7 @@ using System.Windows;
 using System.Net.Sockets;
 using System.IO;
 
-namespace chat_app
+namespace chat_app.Views
 {
     public partial class ChatWindow : Window
     {

@@ -38,7 +38,7 @@
                              Background="#1A1A1A" Foreground="Gray" BorderBrush="#00FF00" BorderThickness="1" 
                              GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
                     <!-- Connect Button -->
-                    <Button Content="Connect" Width="120" Height="40" Margin="0,30,0,0" HorizontalAlignment="Center" 
+                    <Button x:Name="ConnectButton" Content="Connect" Width="120" Height="40" Margin="0,30,0,0" HorizontalAlignment="Center" 
                             VerticalAlignment="Bottom" Background="#00FF00" Foreground="#0F0F0F" 
                             FontWeight="Bold" Click="ConnectButton_Click" FontFamily="Courier New"/>
                 </StackPanel>

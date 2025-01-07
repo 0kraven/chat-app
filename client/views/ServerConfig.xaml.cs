@@ -6,6 +6,7 @@ using System.Windows.Controls; // Add this line
 
 namespace chat_app.Views
 {
+    
     public partial class ServerConfig : Window
     {
         public ServerConfig()

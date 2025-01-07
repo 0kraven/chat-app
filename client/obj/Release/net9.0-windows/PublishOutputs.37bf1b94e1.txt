@@ -1,5 +1,0 @@
-D:\projects\chat-app\publish\chatapp.exe
-D:\projects\chat-app\publish\chatapp.dll
-D:\projects\chat-app\publish\chatapp.deps.json
-D:\projects\chat-app\publish\chatapp.runtimeconfig.json
-D:\projects\chat-app\publish\chatapp.pdb
