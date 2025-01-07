@@ -3,15 +3,16 @@ using System.Windows;
 using System.Net.Sockets;
 using System.IO;
 
-namespace chat_app.Views
+namespace chat_app.views
 {
     public partial class ChatWindow : Window
     {
         private TcpClient _client;  // Store the TcpClient
-
+        string username;
         // Constructor now accepts a TcpClient
-        public ChatWindow(TcpClient client)
+        public ChatWindow(TcpClient client, string user)
         {
+            username = user;
             InitializeComponent();  // Initialize UI components
             _client = client;  // Store the TcpClient
             LoadConnectedUsers();  // Load sample connected users
@@ -39,7 +40,7 @@ namespace chat_app.Views
                     string message = await reader.ReadLineAsync();  // Async read
                     if (!string.IsNullOrEmpty(message))
                     {
-                        AddMessageToChat("Server", message);  // Display message in chat
+                        AddMessageToChat(message);  // Display message in chat
                     }
                 }
             }
@@ -58,10 +59,6 @@ namespace chat_app.Views
             {
                 // Send the message to the server
                 SendMessageToServer(message);
-
-                // Add the message to the chat
-                AddMessageToChat("You", message);
-
                 // Clear the input field
                 MessageInput.Clear();
             }
@@ -84,11 +81,11 @@ namespace chat_app.Views
         }
 
         // Method to add a new message to the chat area
-        private void AddMessageToChat(string username, string message)
+        private void AddMessageToChat(string message)
         {
             var messageTextBlock = new System.Windows.Controls.TextBlock
             {
-                Text = $"{username}: {message}",
+                Text = $"{message}",
                 Foreground = System.Windows.Media.Brushes.LimeGreen,
                 FontSize = 12,
                 TextWrapping = System.Windows.TextWrapping.Wrap

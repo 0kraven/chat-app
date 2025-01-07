@@ -4,7 +4,7 @@ using System.Net.Sockets;
 using System.Windows;
 using System.Windows.Controls; // Add this line
 
-namespace chat_app.Views
+namespace chat_app.views
 {
     
     public partial class ServerConfig : Window
@@ -68,15 +68,18 @@ namespace chat_app.Views
             try
             {
                 var client = new TcpClient();
-                var result = client.BeginConnect(serverIP, 12345, null, null);
-                var success = result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(5));
+                var result = client.BeginConnect(serverIP, 5000, null, null);
 
-                if (!success)
-                {
-                    throw new Exception("Connection timed out.");
+                try {
+                    
+
+                    // Block until the connection is complete
+                    client.EndConnect(result);
+
+                    MessageBox.Show("Connected to the server!");
+                } catch (Exception ex) {
+                    MessageBox.Show("Failed to connect: " + ex.Message);
                 }
-
-                client.EndConnect(result);  // Complete connection
 
                 NetworkStream stream = client.GetStream();
                 StreamWriter writer = new StreamWriter(stream);
@@ -90,7 +93,7 @@ namespace chat_app.Views
                 if (serverResponse == "OK")
                 {
                     // Pass the TcpClient to the ChatWindow
-                    ChatWindow chatWindow = new ChatWindow(client);
+                    ChatWindow chatWindow = new ChatWindow(client, username);
                     chatWindow.Show();
 
                     this.Close();
