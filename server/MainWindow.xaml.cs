@@ -1,52 +1,40 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Windows;
-using System.Collections.Generic;
 
-namespace ServerApp
+namespace TcpServer
 {
     public partial class MainWindow : Window
     {
         private TcpListener _tcpListener;
-        private Thread _listenerThread;
-        private List<TcpClient> _clients;
+        private List<TcpClient> _clients = new List<TcpClient>();
+        private List<StreamWriter> _clientWriters = new List<StreamWriter>();
 
         public MainWindow()
         {
             InitializeComponent();
-            _tcpListener = new TcpListener(System.Net.IPAddress.Any, 12345);
-            _clients = new List<TcpClient>();
-        }
-
-        // Start server button click handler
-        private void StartButton_Click(object sender, RoutedEventArgs e)
-        {
             StartServer();
         }
 
-        // Stop server button click handler
-        private void StopButton_Click(object sender, RoutedEventArgs e)
-        {
-            StopServer();
-        }
-
-        // Start server in a separate thread
         private void StartServer()
         {
-            ServerStatus.Text = "Starting...";
-            ServerStatus.Foreground = System.Windows.Media.Brushes.Yellow;
-
             try
             {
+                string ipAddress = "192.168.1.4"; // Localhost
+                int port = 5000; // The port number for the server
+
+                _tcpListener = new TcpListener(IPAddress.Parse(ipAddress), port);
                 _tcpListener.Start();
-                _listenerThread = new Thread(() => ListenForClients());
-                _listenerThread.IsBackground = true;
-                _listenerThread.Start();
-
-                ServerStatus.Text = "Running";
+                ServerStatus.Text = "Server started, waiting for clients...";
                 ServerStatus.Foreground = System.Windows.Media.Brushes.Green;
+
+                Thread listenerThread = new Thread(ListenForClients);
+                listenerThread.IsBackground = true;
+                listenerThread.Start();
             }
             catch (Exception ex)
             {
@@ -55,41 +43,22 @@ namespace ServerApp
             }
         }
 
-        // Stop server
-        private void StopServer()
-        {
-            try
-            {
-                _tcpListener.Stop();
-                _listenerThread?.Join();
-
-                ServerStatus.Text = "Stopped";
-                ServerStatus.Foreground = System.Windows.Media.Brushes.Red;
-            }
-            catch (Exception ex)
-            {
-                ServerStatus.Text = "Error: " + ex.Message;
-                ServerStatus.Foreground = System.Windows.Media.Brushes.Red;
-            }
-        }
-
-        // Listening for incoming client connections
         private void ListenForClients()
         {
             try
             {
                 while (true)
                 {
-                    var client = _tcpListener.AcceptTcpClient();
+                    TcpClient client = _tcpListener.AcceptTcpClient();
+                    Dispatcher.Invoke(() =>
+                    {
+                        ServerStatus.Text = "Client connected!";
+                        ServerStatus.Foreground = System.Windows.Media.Brushes.Green;
+                    });
+
                     Thread clientThread = new Thread(() => HandleClient(client));
                     clientThread.IsBackground = true;
                     clientThread.Start();
-
-                    // Show a popup message when a client is connected
-                    Dispatcher.Invoke(() =>
-                    {
-                        MessageBox.Show("New client connected!", "Client Connected", MessageBoxButton.OK, MessageBoxImage.Information);
-                    });
                 }
             }
             catch (Exception ex)
@@ -102,68 +71,88 @@ namespace ServerApp
             }
         }
 
-
-        // Handle incoming client
         private void HandleClient(TcpClient client)
         {
-            NetworkStream stream = client.GetStream();
-            StreamReader reader = new StreamReader(stream);
-            StreamWriter writer = new StreamWriter(stream);
-
             try
             {
-                // Read the client's username
-                string username = reader.ReadLine();
+                NetworkStream stream = client.GetStream();
+                StreamReader reader = new StreamReader(stream);
+                StreamWriter writer = new StreamWriter(stream);
 
-                // Acknowledge the client
+                // Add client to the list
+                _clients.Add(client);
+                _clientWriters.Add(writer);
+
+                // First, read the username from the client
+                string username = reader.ReadLine();
+                Dispatcher.Invoke(() =>
+                {
+                    ServerMessages.Text += "New user connected: " + username + "\n";
+                });
+
+                // Send a welcome message to the client
                 writer.WriteLine("OK");
                 writer.Flush();
 
-                // Add the client to the list of connected clients
-                _clients.Add(client);
-                UpdateClientListUI();
+                // Broadcast message to all clients when a new client joins
+                BroadcastMessage("Server: " + username + " has joined the chat.");
 
-                // Keep listening for messages from the client
-                while (true)
+                string message;
+                while ((message = reader.ReadLine()) != null)
                 {
-                    string message = reader.ReadLine();
-                    if (message == null) break;
+                    // Handle the message from the client (display it in the server UI)
+                    Dispatcher.Invoke(() =>
+                    {
+                        ServerMessages.Text += username + ": " + message + "\n";
+                    });
+                    // Broadcast the message to all other clients
+                    BroadcastMessage(username + ": " + message);
+                }
 
-                    // Handle message from client (e.g., broadcast)
-                    Console.WriteLine("Received message from " + username + ": " + message);
+                // Remove client from the list when it disconnects
+                _clients.Remove(client);
+                _clientWriters.Remove(writer);
+
+                client.Close();
+                Dispatcher.Invoke(() =>
+                {
+                    ServerStatus.Text = "Client disconnected.";
+                    ServerStatus.Foreground = System.Windows.Media.Brushes.Orange;
+                });
+
+                // Broadcast message to all clients when someone leaves
+                BroadcastMessage(username + " has left the chat.");
+            }
+            catch (Exception ex)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    ServerStatus.Text = "Error during communication: " + ex.Message;
+                    ServerStatus.Foreground = System.Windows.Media.Brushes.Red;
+                });
+            }
+        }
+
+        // Method to broadcast a message to all connected clients
+        private void BroadcastMessage(string message)
+        {
+            try
+            {
+                foreach (StreamWriter writer in _clientWriters)
+                {
+                    // Send the message to each connected client
+                    writer.WriteLine(message);
+                    writer.Flush();
                 }
             }
             catch (Exception ex)
             {
                 Dispatcher.Invoke(() =>
                 {
-                    ServerStatus.Text = "Error: " + ex.Message;
+                    ServerStatus.Text = "Error while broadcasting: " + ex.Message;
                     ServerStatus.Foreground = System.Windows.Media.Brushes.Red;
                 });
             }
-            finally
-            {
-                // Remove client and update UI when client disconnects
-                _clients.Remove(client);
-                UpdateClientListUI();
-                client.Close();
-            }
-        }
-
-        // Update the UI with the list of connected clients
-        private void UpdateClientListUI()
-        {
-            Dispatcher.Invoke(() =>
-            {
-                ClientList.Items.Clear();
-                foreach (var client in _clients)
-                {
-                    NetworkStream stream = client.GetStream();
-                    StreamReader reader = new StreamReader(stream);
-                    string username = reader.ReadLine();  // Assuming the first message is the username
-                    ClientList.Items.Add(username);  // Display username in the UI
-                }
-            });
         }
     }
 }
