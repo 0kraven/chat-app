@@ -3,16 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\blackrose\\Desktop\\chat-app\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C2CB1ED3-D027-464C-85D8-D39DCE7C3D72}|server\\ServerApp.csproj|c:\\users\\blackrose\\desktop\\chat-app\\server\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C2CB1ED3-D027-464C-85D8-D39DCE7C3D72}|server\\ServerApp.csproj|solutionrelative:server\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{944DA733-1DC7-45E9-9332-C9169ED45522}|client\\chatapp.csproj|c:\\users\\blackrose\\desktop\\chat-app\\client\\views\\chatsection.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{944DA733-1DC7-45E9-9332-C9169ED45522}|client\\chatapp.csproj|solutionrelative:client\\views\\chatsection.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{944DA733-1DC7-45E9-9332-C9169ED45522}|client\\chatapp.csproj|c:\\users\\blackrose\\desktop\\chat-app\\client\\views\\serverconfig.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{944DA733-1DC7-45E9-9332-C9169ED45522}|client\\chatapp.csproj|solutionrelative:client\\views\\serverconfig.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{944DA733-1DC7-45E9-9332-C9169ED45522}|client\\chatapp.csproj|c:\\users\\blackrose\\desktop\\chat-app\\client\\views\\serverconfig.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{944DA733-1DC7-45E9-9332-C9169ED45522}|client\\chatapp.csproj|solutionrelative:client\\views\\serverconfig.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2CB1ED3-D027-464C-85D8-D39DCE7C3D72}|server\\ServerApp.csproj|c:\\users\\blackrose\\desktop\\chat-app\\server\\views\\serverlogs.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{C2CB1ED3-D027-464C-85D8-D39DCE7C3D72}|server\\ServerApp.csproj|solutionrelative:server\\views\\serverlogs.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2CB1ED3-D027-464C-85D8-D39DCE7C3D72}|server\\ServerApp.csproj|c:\\users\\blackrose\\desktop\\chat-app\\server\\views\\serverlogs.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2CB1ED3-D027-464C-85D8-D39DCE7C3D72}|server\\ServerApp.csproj|solutionrelative:server\\views\\serverlogs.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2CB1ED3-D027-464C-85D8-D39DCE7C3D72}|server\\ServerApp.csproj|c:\\users\\blackrose\\desktop\\chat-app\\server\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{C2CB1ED3-D027-464C-85D8-D39DCE7C3D72}|server\\ServerApp.csproj|solutionrelative:server\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2CB1ED3-D027-464C-85D8-D39DCE7C3D72}|server\\ServerApp.csproj|c:\\users\\blackrose\\desktop\\chat-app\\server\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2CB1ED3-D027-464C-85D8-D39DCE7C3D72}|server\\ServerApp.csproj|solutionrelative:server\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,43 +34,81 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
+              "Title": "ServerConfig.xaml",
+              "DocumentMoniker": "C:\\Users\\blackrose\\Desktop\\chat-app\\client\\views\\ServerConfig.xaml",
+              "RelativeDocumentMoniker": "client\\views\\ServerConfig.xaml",
+              "ToolTip": "C:\\Users\\blackrose\\Desktop\\chat-app\\client\\views\\ServerConfig.xaml",
+              "RelativeToolTip": "client\\views\\ServerConfig.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-01-08T04:24:54.427Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "ServerConfig.xaml.cs",
               "DocumentMoniker": "C:\\Users\\blackrose\\Desktop\\chat-app\\client\\views\\ServerConfig.xaml.cs",
               "RelativeDocumentMoniker": "client\\views\\ServerConfig.xaml.cs",
               "ToolTip": "C:\\Users\\blackrose\\Desktop\\chat-app\\client\\views\\ServerConfig.xaml.cs",
               "RelativeToolTip": "client\\views\\ServerConfig.xaml.cs",
-              "ViewState": "AgIAAC8AAAAAAAAAAAAgwFcAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAGcAAAAAAAAAAADwv30AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-07T05:53:21.288Z"
+              "WhenOpened": "2025-01-08T04:23:46.834Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ChatSection.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\blackrose\\Desktop\\chat-app\\client\\views\\ChatSection.xaml.cs",
-              "RelativeDocumentMoniker": "client\\views\\ChatSection.xaml.cs",
-              "ToolTip": "C:\\Users\\blackrose\\Desktop\\chat-app\\client\\views\\ChatSection.xaml.cs",
-              "RelativeToolTip": "client\\views\\ChatSection.xaml.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAIA7wDcAAAAbAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "ServerLogs.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\blackrose\\Desktop\\chat-app\\server\\views\\ServerLogs.xaml.cs",
+              "RelativeDocumentMoniker": "server\\views\\ServerLogs.xaml.cs",
+              "ToolTip": "C:\\Users\\blackrose\\Desktop\\chat-app\\server\\views\\ServerLogs.xaml.cs",
+              "RelativeToolTip": "server\\views\\ServerLogs.xaml.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAAAvwDYAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-07T05:12:15.826Z"
+              "WhenOpened": "2025-01-08T03:55:36.492Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
+              "Title": "ServerLogs.xaml",
+              "DocumentMoniker": "C:\\Users\\blackrose\\Desktop\\chat-app\\server\\views\\ServerLogs.xaml",
+              "RelativeDocumentMoniker": "server\\views\\ServerLogs.xaml",
+              "ToolTip": "C:\\Users\\blackrose\\Desktop\\chat-app\\server\\views\\ServerLogs.xaml",
+              "RelativeToolTip": "server\\views\\ServerLogs.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-01-08T03:55:33.58Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\blackrose\\Desktop\\chat-app\\server\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "server\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\blackrose\\Desktop\\chat-app\\server\\MainWindow.xaml",
+              "RelativeToolTip": "server\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-01-08T03:52:45.951Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "C:\\Users\\blackrose\\Desktop\\chat-app\\server\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "server\\MainWindow.xaml.cs",
               "ToolTip": "C:\\Users\\blackrose\\Desktop\\chat-app\\server\\MainWindow.xaml.cs",
               "RelativeToolTip": "server\\MainWindow.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFQAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAwCoAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-07T04:01:59.263Z",
+              "WhenOpened": "2025-01-08T03:51:11.137Z",
               "EditorCaption": ""
             }
           ]
