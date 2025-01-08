@@ -6,7 +6,6 @@ using System.Windows.Controls; // Add this line
 
 namespace chat_app.views
 {
-    
     public partial class ServerConfig : Window
     {
         public ServerConfig()
@@ -19,7 +18,7 @@ namespace chat_app.views
         {
             if (sender is TextBox textBox)
             {
-                if (textBox.Text == "Enter Username" || textBox.Text == "Enter Server IP")
+                if (textBox.Text == "Enter Username" || textBox.Text == "Enter Server IP" || textBox.Text == "Enter Port")
                 {
                     textBox.Text = string.Empty;
                     textBox.Foreground = System.Windows.Media.Brushes.White;
@@ -42,6 +41,10 @@ namespace chat_app.views
                     {
                         textBox.Text = "Enter Server IP";
                     }
+                    else if (textBox.Name == "ServerPortBox")
+                    {
+                        textBox.Text = "Enter Port";
+                    }
                     textBox.Foreground = System.Windows.Media.Brushes.Gray;
                 }
             }
@@ -52,7 +55,9 @@ namespace chat_app.views
         {
             string username = UsernameBox.Text;
             string serverIP = ServerIPBox.Text;
+            string serverPortText = ServerPortBox.Text;
 
+            // Validation for Username, IP, and Port
             if (string.IsNullOrEmpty(username) || username == "Enter Username")
             {
                 MessageBox.Show("Please enter a valid username.");
@@ -65,19 +70,25 @@ namespace chat_app.views
                 return;
             }
 
+            if (string.IsNullOrEmpty(serverPortText) || serverPortText == "Enter Port" || !int.TryParse(serverPortText, out int serverPort))
+            {
+                MessageBox.Show("Please enter a valid port number.");
+                return;
+            }
+
             try
             {
                 var client = new TcpClient();
-                var result = client.BeginConnect(serverIP, 5000, null, null);
+                var result = client.BeginConnect(serverIP, serverPort, null, null);
 
-                try {
-                    
-
+                try
+                {
                     // Block until the connection is complete
                     client.EndConnect(result);
-
                     MessageBox.Show("Connected to the server!");
-                } catch (Exception ex) {
+                }
+                catch (Exception ex)
+                {
                     MessageBox.Show("Failed to connect: " + ex.Message);
                 }
 
@@ -110,6 +121,5 @@ namespace chat_app.views
                 MessageBox.Show("Error connecting to server: " + ex.Message);
             }
         }
-
     }
 }

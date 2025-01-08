@@ -34,7 +34,12 @@
                              Background="#1A1A1A" Foreground="Gray" BorderBrush="#00FF00" BorderThickness="1" 
                              GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
                     <TextBox x:Name="ServerIPBox" Width="300" Height="40" Margin="0,30,0,0" HorizontalAlignment="Center" 
-                             VerticalAlignment="Center" Text="Enter Server IP" Padding="12"  FontFamily="Courier New" 
+                             VerticalAlignment="Center" Text="Enter Server IP" Padding="12" FontFamily="Courier New" 
+                             Background="#1A1A1A" Foreground="Gray" BorderBrush="#00FF00" BorderThickness="1" 
+                             GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
+                    <!-- Port input field -->
+                    <TextBox x:Name="ServerPortBox" Width="300" Height="40" Margin="0,30,0,0" HorizontalAlignment="Center" 
+                             VerticalAlignment="Center" Text="Enter Port" Padding="12" FontFamily="Courier New" 
                              Background="#1A1A1A" Foreground="Gray" BorderBrush="#00FF00" BorderThickness="1" 
                              GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
                     <!-- Connect Button -->
