@@ -1,158 +1,76 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Net;
-using System.Net.Sockets;
-using System.Threading;
 using System.Windows;
+using System.Windows.Controls;
+using server.views;
 
-namespace TcpServer
+namespace server
 {
     public partial class MainWindow : Window
     {
-        private TcpListener _tcpListener;
-        private List<TcpClient> _clients = new List<TcpClient>();
-        private List<StreamWriter> _clientWriters = new List<StreamWriter>();
-
         public MainWindow()
         {
             InitializeComponent();
-            StartServer();
         }
 
-        private void StartServer()
+        // Event handler for the "Save Configuration" button click
+        private void StartServer_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                string ipAddress = "192.168.1.4"; // Localhost
-                int port = 5000; // The port number for the server
+            string serverIP = ServerIPConfigBox.Text;    // Get the IP entered by the user
+            string serverPort = ServerPortConfigBox.Text; // Get the port entered by the user
 
-                _tcpListener = new TcpListener(IPAddress.Parse(ipAddress), port);
-                _tcpListener.Start();
-                ServerStatus.Text = "Server started, waiting for clients...";
-                ServerStatus.Foreground = System.Windows.Media.Brushes.Green;
-
-                Thread listenerThread = new Thread(ListenForClients);
-                listenerThread.IsBackground = true;
-                listenerThread.Start();
-            }
-            catch (Exception ex)
+            // Validation for IP and Port
+            if (string.IsNullOrEmpty(serverIP) || string.IsNullOrEmpty(serverPort))
             {
-                ServerStatus.Text = "Error: " + ex.Message;
-                ServerStatus.Foreground = System.Windows.Media.Brushes.Red;
+                MessageBox.Show("Please enter both the Server IP and Port.", "Input Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
+
+            // Try to parse the port to ensure it's a valid number
+            if (!int.TryParse(serverPort, out int port) || port < 1 || port > 65535)
+            {
+                MessageBox.Show("Please enter a valid port number between 1 and 65535.", "Input Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            // Here, you can save the configuration to a file or any persistent storage.
+            // For example, storing the IP and Port in a configuration file (e.g., App.config, settings.json, etc.)
+
+            // Example:
+            // SaveConfig(serverIP, port);
+
+            MessageBox.Show($"Server IP: {serverIP}\nPort: {port}", "Configuration Saved", MessageBoxButton.OK, MessageBoxImage.Information);
+            server.views.ServerLogs serverLogs = new server.views.ServerLogs();
+            serverLogs.Show();
+            // Optionally, you can close the window after saving
+            this.Close();
         }
 
-        private void ListenForClients()
+        // Focus event to clear placeholder text when the user clicks into the textbox
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            try
+            TextBox textBox = sender as TextBox;
+            if (textBox != null && (textBox.Text == "Enter Server IP" || textBox.Text == "Enter Server Port"))
             {
-                while (true)
-                {
-                    TcpClient client = _tcpListener.AcceptTcpClient();
-                    Dispatcher.Invoke(() =>
-                    {
-                        ServerStatus.Text = "Client connected!";
-                        ServerStatus.Foreground = System.Windows.Media.Brushes.Green;
-                    });
-
-                    Thread clientThread = new Thread(() => HandleClient(client));
-                    clientThread.IsBackground = true;
-                    clientThread.Start();
-                }
-            }
-            catch (Exception ex)
-            {
-                Dispatcher.Invoke(() =>
-                {
-                    ServerStatus.Text = "Error: " + ex.Message;
-                    ServerStatus.Foreground = System.Windows.Media.Brushes.Red;
-                });
+                textBox.Clear();
+                textBox.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.White);
             }
         }
 
-        private void HandleClient(TcpClient client)
+        // Lost focus event to restore placeholder text if the textbox is empty
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            try
+            TextBox textBox = sender as TextBox;
+            if (textBox != null && string.IsNullOrEmpty(textBox.Text))
             {
-                NetworkStream stream = client.GetStream();
-                StreamReader reader = new StreamReader(stream);
-                StreamWriter writer = new StreamWriter(stream);
+                if (textBox.Name == "ServerIPConfigBox")
+                    textBox.Text = "Enter Server IP";
+                else if (textBox.Name == "ServerPortConfigBox")
+                    textBox.Text = "Enter Server Port";
 
-                // Add client to the list
-                _clients.Add(client);
-                _clientWriters.Add(writer);
-
-                // First, read the username from the client
-                string username = reader.ReadLine();
-                Dispatcher.Invoke(() =>
-                {
-                    ServerMessages.Text += "New user connected: " + username + "\n";
-                });
-
-                // Send a welcome message to the client
-                writer.WriteLine("OK");
-                writer.Flush();
-
-                // Broadcast message to all clients when a new client joins
-                BroadcastMessage("Server: " + username + " has joined the chat.");
-
-                string message;
-                while ((message = reader.ReadLine()) != null)
-                {
-                    // Handle the message from the client (display it in the server UI)
-                    Dispatcher.Invoke(() =>
-                    {
-                        ServerMessages.Text += username + ": " + message + "\n";
-                    });
-                    // Broadcast the message to all other clients
-                    BroadcastMessage(username + ": " + message);
-                }
-
-                // Remove client from the list when it disconnects
-                _clients.Remove(client);
-                _clientWriters.Remove(writer);
-
-                client.Close();
-                Dispatcher.Invoke(() =>
-                {
-                    ServerStatus.Text = "Client disconnected.";
-                    ServerStatus.Foreground = System.Windows.Media.Brushes.Orange;
-                });
-
-                // Broadcast message to all clients when someone leaves
-                BroadcastMessage(username + " has left the chat.");
-            }
-            catch (Exception ex)
-            {
-                Dispatcher.Invoke(() =>
-                {
-                    ServerStatus.Text = "Error during communication: " + ex.Message;
-                    ServerStatus.Foreground = System.Windows.Media.Brushes.Red;
-                });
+                textBox.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Gray);
             }
         }
 
-        // Method to broadcast a message to all connected clients
-        private void BroadcastMessage(string message)
-        {
-            try
-            {
-                foreach (StreamWriter writer in _clientWriters)
-                {
-                    // Send the message to each connected client
-                    writer.WriteLine(message);
-                    writer.Flush();
-                }
-            }
-            catch (Exception ex)
-            {
-                Dispatcher.Invoke(() =>
-                {
-                    ServerStatus.Text = "Error while broadcasting: " + ex.Message;
-                    ServerStatus.Foreground = System.Windows.Media.Brushes.Red;
-                });
-            }
-        }
+        
     }
 }
