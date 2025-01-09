@@ -86,24 +86,25 @@ namespace chat_app.views
             var messageTextBlock = new System.Windows.Controls.TextBlock
             {
                 Text = $"{message}",
-                Foreground = System.Windows.Media.Brushes.LimeGreen,
+                Foreground = System.Windows.Media.Brushes.DarkRed,
                 FontSize = 12,
                 TextWrapping = System.Windows.TextWrapping.Wrap
             };
 
             var messageBorder = new System.Windows.Controls.Border
             {
-                BorderBrush = System.Windows.Media.Brushes.LimeGreen,
+                BorderBrush = System.Windows.Media.Brushes.DarkRed,
                 BorderThickness = new Thickness(1),
                 Padding = new Thickness(5),
                 Margin = new Thickness(3),
                 Child = messageTextBlock
             };
-
-            if (MessagesPanel is System.Windows.Controls.Panel panel)
-            {
-                panel.Children.Insert(0, messageBorder);  // Insert at the top of the panel
-            }
+            MessagesPanel.Children.Add(messageBorder);
+            ScrollViewer.ScrollToEnd();
+            //if (MessagesPanel is System.Windows.Controls.Panel panel)
+            //{
+            //    panel.Children.Insert(1,messageBorder);  // Insert at the top of the panel
+            //}
         }
 
         // Event handler for GotFocus (when the TextBox is focused)

@@ -34,8 +34,8 @@
                    Margin="0,0,0,0" />
 
         <!-- Chat Messages Section -->
-        <ScrollViewer Grid.Row="1" Grid.Column="0" VerticalScrollBarVisibility="Hidden" Background="#1A1A1A" Margin="10,10,10,10">
-            <StackPanel x:Name="MessagesPanel" VerticalAlignment="Top">
+        <ScrollViewer x:Name="ScrollViewer" Grid.Row="1" Grid.Column="0" VerticalScrollBarVisibility="Hidden" Background="#1A1A1A" Margin="10,10,10,10">
+            <StackPanel x:Name="MessagesPanel" VerticalAlignment="Bottom" >
                 <!-- Sample Messages will be added dynamically -->
             </StackPanel>
         </ScrollViewer>

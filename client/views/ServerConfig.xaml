@@ -1,7 +1,7 @@
 <Window x:Class="chat_app.views.ServerConfig"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="BLACK HAT CHAT" Background="#0F0F0F" ResizeMode="NoResize" WindowState="Maximized" WindowStyle="None">
+        Title="ZeroDayCrew ChatRoom" Background="#0F0F0F" ResizeMode="NoResize" WindowState="Maximized" WindowStyle="None">
     <Grid>
         <!-- Define 1 row and 1 column for centering -->
         <Grid.RowDefinitions>

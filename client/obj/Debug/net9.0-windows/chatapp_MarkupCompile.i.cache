@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET9_0;NETCOREAPP
 C:\Users\blackrose\Desktop\chat-app\client\App.xaml
-32023135719
+4775669267
 
-8-1692878855
+930671127
 201668129756
-MainWindow.xaml;views\ChatSection.xaml;views\ServerConfig.xaml;
+MainWindow.xaml;views\ChatSection.xaml;views\ServerConfig.xaml;views\SettingsWindow.xaml;
 
-False
+True
 

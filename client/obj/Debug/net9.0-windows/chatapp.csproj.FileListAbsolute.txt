@@ -22,3 +22,6 @@ C:\Users\blackrose\Desktop\chat-app\client\obj\Debug\net9.0-windows\refint\chata
 C:\Users\blackrose\Desktop\chat-app\client\obj\Debug\net9.0-windows\chatapp.pdb
 C:\Users\blackrose\Desktop\chat-app\client\obj\Debug\net9.0-windows\chatapp.genruntimeconfig.cache
 C:\Users\blackrose\Desktop\chat-app\client\obj\Debug\net9.0-windows\ref\chatapp.dll
+C:\Users\blackrose\Desktop\chat-app\client\obj\Debug\net9.0-windows\views\SettingsWindow.g.cs
+C:\Users\blackrose\Desktop\chat-app\client\obj\Debug\net9.0-windows\chatapp_MarkupCompile.lref
+C:\Users\blackrose\Desktop\chat-app\client\obj\Debug\net9.0-windows\views\SettingsWindow.baml
