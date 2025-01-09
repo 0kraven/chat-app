@@ -140,6 +140,7 @@ namespace server.views
                     Margin = new Thickness(5)
                 });
             });
+            ScrollViewer.ScrollToEnd();
         }
 
         private void CommandInput_GotFocus(object sender, RoutedEventArgs e)

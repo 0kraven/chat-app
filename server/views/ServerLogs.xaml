@@ -29,8 +29,8 @@
                    Margin="0,0,0,0"/>
 
         <!-- Server Logs Section -->
-        <ScrollViewer Grid.Row="1" Grid.Column="0" Background="#1A1A1A" Margin="10,10,10,10">
-            <StackPanel x:Name="ServerLogsPanel" VerticalAlignment="Top">
+        <ScrollViewer x:Name="ScrollViewer" Grid.Row="1" Grid.Column="0" Background="#1A1A1A" Margin="10,10,10,10">
+            <StackPanel x:Name="ServerLogsPanel" VerticalAlignment="Bottom">
                 <!-- Server logs will be added dynamically -->
             </StackPanel>
         </ScrollViewer>
