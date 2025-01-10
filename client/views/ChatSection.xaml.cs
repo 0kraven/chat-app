@@ -93,7 +93,7 @@ namespace chat_app.views
 
             var messageBorder = new System.Windows.Controls.Border
             {
-                BorderBrush = System.Windows.Media.Brushes.DarkRed,
+                BorderBrush = System.Windows.Media.Brushes.LimeGreen,
                 BorderThickness = new Thickness(1),
                 Padding = new Thickness(5),
                 Margin = new Thickness(3),
