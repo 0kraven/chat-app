@@ -105,13 +105,11 @@ namespace chat_app.views
                 string serverResponse = reader.ReadLine();
 
                     // Pass the TcpClient to the ChatWindow
-                    ChatWindow chatWindow = new ChatWindow(client, username);
-                    chatWindow.Show();
-                resetFields();
-                    
-
-
-                // client.Close();
+                ChatWindow chatWindow = new ChatWindow(client, username);
+                chatWindow.Show();
+                this.Close();
+                //client.Close();
+                return;
             }
             catch (Exception ex)
             {
