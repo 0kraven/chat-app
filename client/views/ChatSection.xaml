@@ -41,15 +41,15 @@
         </ScrollViewer>
 
         <!-- Sidebar Section -->
-        <StackPanel Grid.Row="1" Grid.Column="1" Background="#262626" Margin="10,10,10,10">
+        <StackPanel x:Name="ConnectedUsersPanel" Grid.Row="1" Grid.Column="1" Background="#262626" Margin="10,10,10,10">
             <TextBlock Text="Connected Users"
-                       FontFamily="Courier New"
-                       FontSize="18"
-                       FontWeight="Bold"
-                       Foreground="#00FF00"
-                       Margin="10,10,10,10"/>
-            <ListBox x:Name="UserList" Background="#1A1A1A" Foreground="#00FF00" BorderBrush="#00FF00" BorderThickness="1" FontFamily="Courier New">
-                <!-- Dynamically populate this list -->
+                FontFamily="Courier New"
+                FontSize="18"
+                FontWeight="Bold"
+                Foreground="#00FF00"
+                Margin="10,10,10,10"/>
+            <ListBox x:Name="ClientList" Background="#1A1A1A" Foreground="#00FF00" BorderBrush="#00FF00" BorderThickness="1" FontFamily="Courier New">
+                <!-- Connected clients will be listed here -->
             </ListBox>
         </StackPanel>
 

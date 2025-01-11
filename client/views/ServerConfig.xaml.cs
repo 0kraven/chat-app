@@ -61,18 +61,21 @@ namespace chat_app.views
             if (string.IsNullOrEmpty(username) || username == "Enter Username")
             {
                 MessageBox.Show("Please enter a valid username.");
+                resetFields();
                 return;
             }
 
             if (string.IsNullOrEmpty(serverIP) || serverIP == "Enter Server IP")
             {
                 MessageBox.Show("Please enter a valid server IP.");
+                resetFields();
                 return;
             }
 
             if (string.IsNullOrEmpty(serverPortText) || serverPortText == "Enter Port" || !int.TryParse(serverPortText, out int serverPort))
             {
                 MessageBox.Show("Please enter a valid port number.");
+                resetFields();
                 return;
             }
 
@@ -101,25 +104,31 @@ namespace chat_app.views
                 StreamReader reader = new StreamReader(stream);
                 string serverResponse = reader.ReadLine();
 
-                if (serverResponse == "OK")
-                {
                     // Pass the TcpClient to the ChatWindow
                     ChatWindow chatWindow = new ChatWindow(client, username);
                     chatWindow.Show();
+                resetFields();
+                    
 
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Connection failed. Server responded with: " + serverResponse);
-                }
 
                 // client.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error connecting to server: " + ex.Message);
+                resetFields();
+
             }
+
+        }
+        private void resetFields()
+        {
+            UsernameBox.Text = "Enter Username";
+            ServerIPBox.Text = "Enter Server IP";
+            ServerPortBox.Text = "Enter Port";
+            UsernameBox.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Gray);
+            ServerIPBox.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Gray);
+            ServerPortBox.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Gray);
         }
     }
 }
