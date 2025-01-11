@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
+using System.Net;
 
 namespace server.views
 {
@@ -17,10 +18,13 @@ namespace server.views
         private List<StreamWriter> _clientWriters = new List<StreamWriter>();
         private Dictionary<TcpClient, string> _clientUsernames = new Dictionary<TcpClient, string>();
         private bool _isRunning = false;
-
-        public ServerLogs()
+        private string ip_addr;
+        private int port_no;
+        public ServerLogs(string ip, int port)
         {
             InitializeComponent();
+            port_no = port;
+            ip_addr = ip;
             StartServer();
         }
 
@@ -28,10 +32,11 @@ namespace server.views
         {
             try
             {
-                _tcpListener = new TcpListener(System.Net.IPAddress.Any, 5000);
+               
+                _tcpListener = new TcpListener(IPAddress.Parse(ip_addr), port_no);
                 _tcpListener.Start();
                 _isRunning = true;
-                AppendLog("Server started on port 5000.");
+                AppendLog($"Server started on port {port_no}.");
 
                 // Start the listener thread
                 Thread listenerThread = new Thread(ListenForClients)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using server.views;
@@ -19,9 +20,9 @@ namespace server
             string serverPort = ServerPortConfigBox.Text; // Get the port entered by the user
 
             // Validation for IP and Port
-            if (string.IsNullOrEmpty(serverIP) || string.IsNullOrEmpty(serverPort))
+            if (!IPAddress.TryParse(serverIP, out _))
             {
-                MessageBox.Show("Please enter both the Server IP and Port.", "Input Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please enter a valid IP address.", "Input Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -39,7 +40,7 @@ namespace server
             // SaveConfig(serverIP, port);
 
             MessageBox.Show($"Server IP: {serverIP}\nPort: {port}", "Configuration Saved", MessageBoxButton.OK, MessageBoxImage.Information);
-            server.views.ServerLogs serverLogs = new server.views.ServerLogs();
+            server.views.ServerLogs serverLogs = new server.views.ServerLogs(serverIP, port);
             serverLogs.Show();
             // Optionally, you can close the window after saving
             this.Close();
