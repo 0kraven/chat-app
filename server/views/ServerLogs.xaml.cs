@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Windows;
+using System.Net.Sockets;
+using System.IO;
+using System.Threading;
+using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
-using System.Net.Sockets;
-using System.Threading;
-using System.IO;
-using System.Collections.Generic;
 
 namespace server.views
 {
@@ -15,6 +15,7 @@ namespace server.views
         private TcpListener _tcpListener;
         private List<TcpClient> _clients = new List<TcpClient>();
         private List<StreamWriter> _clientWriters = new List<StreamWriter>();
+        private Dictionary<TcpClient, string> _clientUsernames = new Dictionary<TcpClient, string>();
         private bool _isRunning = false;
 
         public ServerLogs()
@@ -32,8 +33,11 @@ namespace server.views
                 _isRunning = true;
                 AppendLog("Server started on port 5000.");
 
-                Thread listenerThread = new Thread(ListenForClients);
-                listenerThread.IsBackground = true;
+                // Start the listener thread
+                Thread listenerThread = new Thread(ListenForClients)
+                {
+                    IsBackground = true
+                };
                 listenerThread.Start();
             }
             catch (Exception ex)
@@ -44,18 +48,34 @@ namespace server.views
 
         private void ListenForClients()
         {
+            // Start broadcasting the client list
+            Thread clientListBroadcasterThread = new Thread(BroadcastClientListContinuously)
+            {
+                IsBackground = true
+            };
+            clientListBroadcasterThread.Start();
+
             while (_isRunning)
             {
                 try
                 {
                     var client = _tcpListener.AcceptTcpClient();
                     _clients.Add(client);
-                    _clientWriters.Add(new StreamWriter(client.GetStream()));
+
+                    var writer = new StreamWriter(client.GetStream());
+                    lock (_clientWriters)
+                    {
+                        _clientWriters.Add(writer);
+                    }
+
                     Dispatcher.Invoke(() => ClientList.Items.Add(client.Client.RemoteEndPoint.ToString()));
                     AppendLog("New user connected: " + client.Client.RemoteEndPoint);
 
-                    Thread clientThread = new Thread(() => HandleClient(client));
-                    clientThread.IsBackground = true;
+                    // Start a new thread to handle the client
+                    Thread clientThread = new Thread(() => HandleClient(client, writer))
+                    {
+                        IsBackground = true
+                    };
                     clientThread.Start();
                 }
                 catch (Exception ex)
@@ -65,25 +85,34 @@ namespace server.views
             }
         }
 
-        private void HandleClient(TcpClient client)
+        private void HandleClient(TcpClient client, StreamWriter writer)
         {
             NetworkStream stream = client.GetStream();
             StreamReader reader = new StreamReader(stream);
-            StreamWriter writer = new StreamWriter(stream);
-            writer.WriteLine("OK");
-            writer.Flush();
+
             try
             {
-                // Read username from client
+                // Receive username from client
                 string username = reader.ReadLine();
+                lock (_clientUsernames)
+                {
+                    _clientUsernames[client] = username;
+                }
+
+                // Send welcome message to the client
+                writer.WriteLine("Welcome " + username + "!");
+                writer.Flush();
+
+                // Log the new connection
                 Dispatcher.Invoke(() => AppendLog("New user connected: " + username));
-                BroadcastMessage("Server: " + username + " has joined the chat.");
+                BroadcastMessage($"Server: {username} has joined the chat.");
 
                 string message;
                 while ((message = reader.ReadLine()) != null)
                 {
-                    Dispatcher.Invoke(() => AppendLog(username + ": " + message));
-                    BroadcastMessage(username + ": " + message);
+                    // Ensure message is broadcasted only once
+                    Dispatcher.Invoke(() => AppendLog($"{username}: {message}"));
+                    BroadcastMessage($"{username}: {message}");
                 }
             }
             catch (Exception ex)
@@ -92,28 +121,109 @@ namespace server.views
             }
             finally
             {
-                _clients.Remove(client);
-                _clientWriters.Remove(writer);
+                // Clean up when client disconnects
+                lock (_clients)
+                {
+                    _clients.Remove(client);
+                }
+                lock (_clientWriters)
+                {
+                    _clientWriters.Remove(writer);
+                }
+
+                // Broadcast user departure message
+                if (_clientUsernames.ContainsKey(client))
+                {
+                    string disconnectedUser;
+                    lock (_clientUsernames)
+                    {
+                        disconnectedUser = _clientUsernames[client];
+                        _clientUsernames.Remove(client);
+                    }
+                    BroadcastMessage($"Server: {disconnectedUser} has left the chat.");
+                }
+
+                // Update client list UI
                 Dispatcher.Invoke(() => ClientList.Items.Remove(client.Client.RemoteEndPoint.ToString()));
+
+                // Close the connection
                 client.Close();
                 AppendLog("Client disconnected.");
-                BroadcastMessage("Server: A user has left the chat.");
             }
         }
 
         private void BroadcastMessage(string message)
         {
-            foreach (var writer in _clientWriters)
+            List<StreamWriter> failedWriters = new List<StreamWriter>();
+
+            lock (_clientWriters)
             {
-                try
+                foreach (var writer in _clientWriters)
                 {
-                    writer.WriteLine(message);
-                    writer.Flush();
+                    try
+                    {
+                        writer.WriteLine(message);
+                        writer.Flush();
+                    }
+                    catch (Exception ex)
+                    {
+                        AppendLog("Error broadcasting message: " + ex.Message);
+                        failedWriters.Add(writer); // Track failed writers
+                    }
                 }
-                catch (Exception ex)
+
+                // Remove failed writers after broadcasting
+                foreach (var failedWriter in failedWriters)
                 {
-                    AppendLog("Error broadcasting message: " + ex.Message);
+                    _clientWriters.Remove(failedWriter);
                 }
+            }
+        }
+
+        private void BroadcastClientListContinuously()
+        {
+            try
+            {
+                while (_isRunning)
+                {
+                    List<StreamWriter> failedWriters = new List<StreamWriter>();
+
+                    // Lock client usernames and writers while broadcasting the list
+                    lock (_clientUsernames)
+                    {
+                        var clientList = new List<string>(_clientUsernames.Values);
+                        string clientListJson = System.Text.Json.JsonSerializer.Serialize(clientList);
+
+                        lock (_clientWriters)
+                        {
+                            foreach (var writer in _clientWriters)
+                            {
+                                try
+                                {
+                                    writer.WriteLine("CLIENT_LIST:" + clientListJson);
+                                    writer.Flush();
+                                }
+                                catch (Exception ex)
+                                {
+                                    AppendLog("Error broadcasting client list: " + ex.Message);
+                                    failedWriters.Add(writer);
+                                }
+                            }
+
+                            // Remove failed writers after broadcasting
+                            foreach (var failedWriter in failedWriters)
+                            {
+                                _clientWriters.Remove(failedWriter);
+                            }
+                        }
+                    }
+
+                    Thread.Sleep(1000); // Broadcast every second
+                }
+            }
+            catch (Exception ex)
+            {
+                AppendLog("Error in client list broadcaster: " + ex.Message);
             }
         }
 
@@ -122,8 +232,8 @@ namespace server.views
             string command = CommandInput.Text;
             if (!string.IsNullOrWhiteSpace(command))
             {
-                AppendLog("Server command: " + command);
-                BroadcastMessage("Server: " + command);
+                AppendLog("Admin: " + command);
+                BroadcastMessage("Admin: " + command);
                 CommandInput.Clear();
             }
         }
@@ -139,8 +249,8 @@ namespace server.views
                     FontFamily = new FontFamily("Courier New"),
                     Margin = new Thickness(5)
                 });
+                ScrollViewer.ScrollToEnd();
             });
-            ScrollViewer.ScrollToEnd();
         }
 
         private void CommandInput_GotFocus(object sender, RoutedEventArgs e)
