@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\blackrose\Desktop\chat-app\client\obj\Debug\net9.0-windows\
+C:\Users\blackrose\Desktop\ZeroDayCrew\client\obj\Debug\net9.0-windows\
 chatapp
 none
 false
 TRACE;DEBUG;NET;NET9_0;NETCOREAPP
-C:\Users\blackrose\Desktop\chat-app\client\App.xaml
+C:\Users\blackrose\Desktop\ZeroDayCrew\client\App.xaml
 4775669267
 
 930671127
 201668129756
 MainWindow.xaml;views\ChatSection.xaml;views\ServerConfig.xaml;views\SettingsWindow.xaml;
 
-True
+False
 

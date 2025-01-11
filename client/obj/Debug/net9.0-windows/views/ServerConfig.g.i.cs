@@ -85,7 +85,7 @@ namespace chat_app.views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/chatapp;V1.0.0.0;component/views/serverconfig.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/chatapp;component/views/serverconfig.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\views\ServerConfig.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
