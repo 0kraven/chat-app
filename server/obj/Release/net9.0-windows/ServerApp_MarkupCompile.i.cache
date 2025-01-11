@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\blackrose\Desktop\chat-app\server\obj\Release\net9.0-windows\
+C:\Users\blackrose\Desktop\ZeroDayCrew\server\obj\Release\net9.0-windows\
 ServerApp
 none
 false
 TRACE;RELEASE;NET;NET9_0;NETCOREAPP
-C:\Users\blackrose\Desktop\chat-app\server\App.xaml
-11407045341
+C:\Users\blackrose\Desktop\ZeroDayCrew\server\App.xaml
+2711645218
 
-61578370080
+7-1935177242
 201668129756
-MainWindow.xaml;
+MainWindow.xaml;views\ServerLogs.xaml;
 
 False
 

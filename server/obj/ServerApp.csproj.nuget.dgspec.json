@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\blackrose\\Desktop\\chat-app\\server\\ServerApp.csproj": {}
+    "C:\\Users\\blackrose\\Desktop\\ZeroDayCrew\\server\\ServerApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\blackrose\\Desktop\\chat-app\\server\\ServerApp.csproj": {
+    "C:\\Users\\blackrose\\Desktop\\ZeroDayCrew\\server\\ServerApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\blackrose\\Desktop\\chat-app\\server\\ServerApp.csproj",
+        "projectUniqueName": "C:\\Users\\blackrose\\Desktop\\ZeroDayCrew\\server\\ServerApp.csproj",
         "projectName": "ServerApp",
-        "projectPath": "C:\\Users\\blackrose\\Desktop\\chat-app\\server\\ServerApp.csproj",
+        "projectPath": "C:\\Users\\blackrose\\Desktop\\ZeroDayCrew\\server\\ServerApp.csproj",
         "packagesPath": "C:\\Users\\blackrose\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\blackrose\\Desktop\\chat-app\\server\\obj\\",
+        "outputPath": "C:\\Users\\blackrose\\Desktop\\ZeroDayCrew\\server\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
