@@ -4,7 +4,19 @@ This repository contains the implementation of a server-client chatroom system b
 Designed for a chatroom application with a hacker-inspired theme. 🕶️
 
 ---
+<div>
 
+
+
+  <img src="https://github.com/user-attachments/assets/2979b4af-8ffa-4373-9adf-a38beb41a578" alt="Welcome Screen for Client" style="width: 100%; height: auto; margin-bottom: 10px;">
+  <!-- Grid layout for the remaining images -->
+  <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+    <img src="https://github.com/user-attachments/assets/9b6cd3be-1196-445d-a39c-586d10f35d8d" alt="Client Side Configuration" style="width: 100%; height: auto;">
+    <img src="https://github.com/user-attachments/assets/5a28e8c5-8529-4fe2-8709-f027c28e7acc" alt="Client Side Logs" style="width: 100%; height: auto;">
+    <img src="https://github.com/user-attachments/assets/8d8dc139-0747-49f1-9eaf-df77a20b39d4" alt="Server Side Configuration" style="width: 100%; height: auto;">
+    <img src="https://github.com/user-attachments/assets/7573ca6b-8778-49ff-932b-efba0c76d9b3" alt="Server Side Logs" style="width: 100%; height: auto;">
+  </div>
+</div>
 ## ✨ Features
 
 - **🛠️ Server Management**:
